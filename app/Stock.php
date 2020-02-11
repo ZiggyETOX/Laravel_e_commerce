@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Model
 {
-    //
+    
+    protected $fillable = [
+        // 'date',
+    ];
+    
+    public function Product() {
+        return $this->belongsTo('App\Product');
+    }
 }
