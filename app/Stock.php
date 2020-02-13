@@ -8,7 +8,6 @@ class Stock extends Model
 {
     
     protected $fillable = [
-    	'ActionIndicator',
     	'StockLevel',
     	'StockAmount',
     	'product_id',

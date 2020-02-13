@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->double('SAPrice', 8, 2);
             $table->double('BotswanaPrice', 8, 2);
             $table->double('NamibiaPrice', 8, 2);
-            $table->string('ActionIndicator');
+            // $table->string('ActionIndicator');
 
 
             $table->timestamps();

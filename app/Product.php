@@ -19,7 +19,6 @@ class Product extends Model
 			'SAPrice',
 			'BotswanaPrice',
 			'NamibiaPrice',
-			'ActionIndicator',
     ];
 
     public function Stock() {
