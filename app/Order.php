@@ -11,11 +11,19 @@ class Order extends Model
         // 'date',
     ];
 
-    public function Product() {
-        return $this->belongsToMany(Product::class);
+    public function OrderItem() {
+        return $this->hasMany('App\OrderItem');
     }
     
     public function User() {
         return $this->belongsTo('App\User');
+    }
+
+
+    /**
+     * Get all of the Products for the Order.
+     */
+    public function Product() {
+        return $this->hasManyThrough('App\Product', 'App\OrderItem');
     }
 }

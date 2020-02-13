@@ -8,14 +8,25 @@ class Product extends Model
 {
     
     protected $fillable = [
-        // 'date',
+        	'ProductName',
+			'ProductShortDescription',
+			'CSProductCategory',
+			'CSProductSubCategory',
+			'TopLevel',
+			'SKU',
+			'NewDate',
+			'Promotion',
+			'SAPrice',
+			'BotswanaPrice',
+			'NamibiaPrice',
+			'ActionIndicator',
     ];
 
     public function Stock() {
         return $this->hasMany('App\Stock');
     }
     
-    public function Order() {
-        return $this->belongsToMany(Order::class);
+    public function OrderItem() {
+        return $this->hasMany('App\OrderItem');
     }
 }

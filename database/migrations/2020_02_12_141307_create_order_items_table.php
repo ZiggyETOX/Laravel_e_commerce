@@ -13,8 +13,9 @@ class CreateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('OrderItems', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->bigIncrements('id');
+            
             $table->double('Price', 8, 2);
             $table->integer('Quantity');
 
@@ -35,6 +36,6 @@ class CreateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('OrderItems');
+        Schema::dropIfExists('order_items');
     }
 }

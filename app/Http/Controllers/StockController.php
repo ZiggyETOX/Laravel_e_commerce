@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Stock;
 use Illuminate\Http\Request;
+use App\Imports\StocksImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StockController extends Controller
 {
@@ -81,5 +83,14 @@ class StockController extends Controller
     public function destroy(Stock $stock)
     {
         //
+    }
+
+    /**
+    * @return \Illuminate\Support\Collection
+    */
+    public function import()
+    {
+        Excel::import(new StocksImport,request()->file('file'));
+        return back();
     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Imports\ProductsImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -14,7 +17,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        
+        $products = \App\Product::all();
+        $return['products'] = $products;
+        return view('/products/index', $return);
+        // dd($product);
     }
 
     /**
@@ -24,7 +31,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -82,4 +88,5 @@ class ProductController extends Controller
     {
         //
     }
+
 }
