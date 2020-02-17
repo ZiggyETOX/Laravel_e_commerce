@@ -54,14 +54,17 @@ class ProcessImport implements ShouldQueue
             switch ($this->row['ActionIndicator']) {
                 case 'A':
                     unset($this->row['ActionIndicator']);
+                    unset($this->row['row_number']);
                     $Process = $importController->store($this->row);
                     break;
                 case 'D':
                     unset($this->row['ActionIndicator']);
+                    unset($this->row['row_number']);
                     $Process = $importController->destroy($this->row);
                     break;
                 case 'U':
                     unset($this->row['ActionIndicator']);
+                    unset($this->row['row_number']);
                     $Process = $importController->update($this->row);
                     break;
                 
@@ -71,14 +74,18 @@ class ProcessImport implements ShouldQueue
             }
             if ($Process == 0) {
 
-                dd('Jobs/importer', $Process);
-                Log::error('ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU']);            
-            }elseif($Process == 1) {
-                Log::notice('Row successfully run.');       
+                // dd('Jobs/importer', $Process);
+                // Log::error('ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU']);             
+                // Log::notice('UN-successfully executed Row : ' . $initial_row['row_number']);              
+                Log::channel('importLog')->info('UN-successfully executed Row : ' . $initial_row['row_number']);      
+            }elseif($Process == 1) {       
+                Log::channel('importLog')->info($initial_row['ImportType'] . ' successfully executed Row : ' . $initial_row['row_number']);
+                // Log::notice($initial_row['ImportType'] . ' successfully executed Row : ' . $initial_row['row_number']);
             }
         } catch (Exception $e) {
-            Log::error('ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU']); 
-            dd($e);
+            // Log::error('ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU']);         
+                // Log::notice('UN-successfully executed : ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU'] . ' row Number: ' . $initial_row['row_number'] . ' Error: ' . $e);            
+                Log::channel('importLog')->info('UN-successfully executed : ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU'] . ' row Number: ' . $initial_row['row_number'] . ' Error: ' . $e);      
         }
     }
 }

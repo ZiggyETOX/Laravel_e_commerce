@@ -41,6 +41,11 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'importLog' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/import.log'),
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
@@ -71,6 +76,7 @@ return [
                 'port' => env('PAPERTRAIL_PORT'),
             ],
         ],
+
 
         'stderr' => [
             'driver' => 'monolog',

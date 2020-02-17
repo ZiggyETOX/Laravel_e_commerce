@@ -11,6 +11,7 @@ use App\Product;
 use Exception;
 
 
+
 class StockController extends Controller
 {
     /**
@@ -61,7 +62,7 @@ class StockController extends Controller
             return 1;
 
         } catch (Exception $e) {
-            Log::error('Stock not saved. SKU: ' . $initial_row['SKU'] . ' Error: ' . $e);
+            Log::error('Stock not saved. SKU: ' . $initial_row['SKU'] . ' Error: Most likely does not have a product to link to.');
             return 2;
         }
     }

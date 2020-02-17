@@ -115,8 +115,21 @@ class ProductController extends Controller
         try {
             $initial_row = $row;
 
+            //check if product exists if not it will fail
             $product = Product::where('SKU', '=', $row['SKU'])->firstOrFail();
-            $product->delete();
+
+            //check if the product has stock. If it does delete it
+            $stock = $product->Stock()->get();
+            if (sizeof($stock)==0) {
+                // no stock for this product.
+            }else{
+                $stocks = $stock;
+                foreach ($stocks as $stock) {
+                    $stock->delete();
+                }
+            }
+            // Deletes product.
+            $product->delete(); 
 
             return 1;
 
