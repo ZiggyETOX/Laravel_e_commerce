@@ -10,12 +10,6 @@
                     <br>
                     <br>
 
-                    <form action="{{ route('pimport') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="form-control">
-                        <br>
-                        <button class="btn btn-success">Import Product Data</button>
-                    </form>
                 </div>
 
                 <div class="card-body">
@@ -29,7 +23,7 @@
                     <ul>
                         @foreach($products as $product)
 
-                        <li><a href="/products/{{ $product->id }}">{{ $product->ProductName }}</a></li>
+                        <li><a href="/products/{{ $product->id }}">{{ $product->SKU }} : {{ $product->ProductName }}</a></li>
                         
                         @endforeach
                     </ul>

@@ -69,7 +69,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $products = \App\Product::all();
+        $return['product'] = $product;
+        return view('/products/show', $return);
     }
 
     /**

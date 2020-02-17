@@ -72,7 +72,7 @@ class ProcessImport implements ShouldQueue
                     # code...
                     break;
             }
-            if ($Process == 0) {
+            if ($Process == 0 || $Process == 2 ) {
 
                 // dd('Jobs/importer', $Process);
                 // Log::error('ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU']);             

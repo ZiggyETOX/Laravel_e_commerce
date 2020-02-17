@@ -29,8 +29,8 @@ class ImportController extends Controller
 	    		$csvName = $csv[$i];
 	            $handle = fopen($csvName . '.csv', "r");
 
+	            dd('do not import');
 	            $import = $this->import($handle, $csvName);
-	            // dd($import);
 	            if ($import) {
 
 					// $myFile = '/path/to/my/file.txt';
@@ -48,6 +48,7 @@ class ImportController extends Controller
 	        	Log::error($e);
 	    	}
     	}
+    	// Queue:work();
     	dd('Completed.');
     }
 
@@ -73,11 +74,19 @@ class ImportController extends Controller
         			$row['ImportType'] = $csvName;
         			$row['row_number'] = $rowcount;
 
+        			// ProcessImport::dispatch($row)
+        			// 	->delay(now()->addMinutes(1));
+        			// ProcessImport::dispatch($row)->onQueue('rabbitmq');
+        			// ProcessImport::dispatch($row)->onConnection('rabbitmq');
+        			
         			$importJob = new ProcessImport($row);
         			dispatch($importJob);
+        			// ProcessImport::dispatch($row);
+        			// 	->delay(now()->addMinutes(1));
 
 
 		        } catch (Exception $e) {
+		        	dd($e);
 		        	Log::error('Job did not dispatch error: ' . $e . ' Row: ' . $rowcount);
 		        }
             }
