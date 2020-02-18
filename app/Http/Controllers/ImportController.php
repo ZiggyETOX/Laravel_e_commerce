@@ -37,15 +37,11 @@ class ImportController extends Controller
 					// File::delete($myFile);
 	            }else{
 
-		            $message = "CSV: " . $csvName . " error -> " . $import;
-		        	Log::error($message);
+		        	Log::error("CSV: " . $csvName . " error -> " . $import);
 	            }
 
 	    	} catch (Exception $e) {
-	            
-	            $message = "CSV: " . $csvName . " not found.";
-	            $e->custom_message = $message;
-	        	Log::error($e);
+	    		Log::channel('check_for_csv')->info("CSV: " . $csvName . " not found." . $e);
 	    	}
     	}
     	// Queue:work();

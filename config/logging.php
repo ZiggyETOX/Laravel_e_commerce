@@ -41,6 +41,11 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'check_for_csv' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/check_for_csv.log'),
+        ],
+
         'importLog' => [
             'driver' => 'single',
             'path' => storage_path('logs/import.log'),
