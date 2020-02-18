@@ -27,6 +27,9 @@ Route::get('/import-check', 'ImportController@check');
 Route::middleware(['auth'])->group(function () {
 
 	Route::resource('products', 'ProductController');
+	Route::resource('stocks', 'StockController');
+	Route::resource('cart', 'CartController');
+	
 	// Route::get('/products/import', 'ProductController@import');
 	// Route::post('pimport', 'ImportController@import')->name('pimport');
 });

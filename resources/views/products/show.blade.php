@@ -14,6 +14,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
                     <table border="1" width="100%">
                         <tbody>
@@ -45,6 +50,20 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
+
+                    <h2>Stock: {{ $stock->StockAmount }}</h2>
+
+                    <br>
+                    <hr>
+                    <br>
+    <!-- //@method('PUT') -->
+                    <form action="/cart" method="POST">
+                        @csrf
+                        <input type="number" name="Quantity" id="Quantity" value="">
+                        <input type="hidden" name="id" id="id" value="{{ $product->id }}">
+                        <input type="submit" name="" value="Add to cart" style="btn btn-lg btn-success">
+                    </form>
                 </div>
             </div>
         </div>

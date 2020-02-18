@@ -69,7 +69,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $products = \App\Product::all();
+        // $products = \App\Product::all();
+        try {
+            $stock = $product->Stock()->first();
+        } catch (Exception $e) {
+            $stock->StockAmount = 0;
+        }
+        $return['stock'] = $stock;
         $return['product'] = $product;
         return view('/products/show', $return);
     }
