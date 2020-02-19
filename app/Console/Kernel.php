@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+
     ];
 
     /**
@@ -25,12 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        // $schedule->call(function(){
-        //     $ImportController = new ImportController();
-        //     $ImportController->check();
-        // })->everyFiveMinutes();
+        $schedule->call('\App\Http\Controllers\ImportController@check')
+                 ->everyMinute();
     }
 
     /**

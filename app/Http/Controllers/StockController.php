@@ -59,11 +59,13 @@ class StockController extends Controller
 
             $stock->product_id = $product->id;
             $stock->save();
-            return 1;
+            $process = ['1', 'Stock Added, Product partner found'];
+            return $process;
 
         } catch (Exception $e) {
             Log::error('Stock not saved. SKU: ' . $initial_row['SKU'] . ' Error: Most likely does not have a product to link to.');
-            return 2;
+            $process = ['2', 'Stock not Added, Product partner not found'];
+            return $process;
         }
     }
 
@@ -114,11 +116,13 @@ class StockController extends Controller
 
             $stock->product_id = $product->id;
             $stock->save();
-            return 1;
+            $process = ['1', 'Stock Updated, Product partner found'];
+            return $process;
 
         } catch (Exception $e) {
             Log::error('Stock not saved. SKU: ' . $initial_row['SKU'] . ' Error: ' . $e);
-            return 2;
+            $process = ['2', 'Stock not Updated, Product partner not found'];
+            return $process;
         }
     }
 
@@ -137,15 +141,18 @@ class StockController extends Controller
             if (sizeof($stock)!=0) {
                 $stock = $stock[0];
                 $stock->delete();
-                return 1;
+                $process = ['1', 'Stock Deleted, Product partner found'];
+                return $process;
             }else{
-                Log::error('Stock found. SKU: ' . $row['SKU']);
-                return 2;
+                Log::error('Stock found. SKU: ' . $row['SKU'])
+                $process = ['2', 'Stock not Deleted, Product partner found but had no Stock to Delete'];
+                return $process;
             }
 
         } catch (Exception $e) {
             Log::error('Stock not deleted. SKU: ' . $initial_row['SKU'] . ' Error: ' . $e);
-            return 2;
+            $process = ['2', 'Stock not Deleted, Product partner not found'];
+            return $process;
         }
     }
 }

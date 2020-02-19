@@ -25,7 +25,6 @@ class ProductController extends Controller
         $products = \App\Product::all();
         $return['products'] = $products;
         return view('/products/index', $return);
-        // dd($product);
     }
 
     /**
@@ -52,13 +51,14 @@ class ProductController extends Controller
                 $product[$key] = $value;
             }
             $product->save();
-            return 1;
+            $process = ['1','Proudct Added'];
+            return $process;
 
         } catch (Exception $e) {
             Log::error('Product not saved. SKU: ' . $initial_row['SKU'] . ' Error: ' . $e);
-            return 2;
+            $process = ['2', 'Product Not Added: check logs'];
+            return $process;
         }
-        // dd($row);
     }
 
     /**
@@ -69,9 +69,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        // $products = \App\Product::all();
         try {
-            $stock = $product->Stock()->first();
+            $stock = $product->Stock()->firstOrFail();
         } catch (Exception $e) {
             $stock->StockAmount = 0;
         }
@@ -106,11 +105,13 @@ class ProductController extends Controller
             }
 
             $product->save();
-            return 1;
+            $process = ['1','Proudct Updated'];
+            return $process;
 
         } catch (Exception $e) {
             Log::error('Product not saved. SKU: ' . $initial_row['SKU'] . ' Error: ' . $e);
-            return 2;
+            $process = ['2', 'Product Not updated: check logs'];
+            return $process;
         }
     }
 
@@ -128,22 +129,27 @@ class ProductController extends Controller
 
             //check if the product has stock. If it does delete it
             $stock = $product->Stock()->get();
+            $msg = 'Proudct Deleted';
             if (sizeof($stock)==0) {
+                $msg = $msg . ' No Stock found to delete';
                 // no stock for this product.
             }else{
                 $stocks = $stock;
                 foreach ($stocks as $stock) {
                     $stock->delete();
+                    $msg = $msg . ' Stock also Deleted';
                 }
             }
+
             // Deletes product.
             $product->delete(); 
-
-            return 1;
+            $process = ['1', $msg];
+            return $process;
 
         } catch (Exception $e) {
             Log::error('Product to be deleted not found. SKU: ' . $initial_row['SKU'] . ' Error: ' . $e);
-            return 2;
+            $process = ['2', 'Product not found to delete'];
+            return $process;
         }
     }
 

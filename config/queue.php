@@ -74,7 +74,7 @@ return [
            
            'dsn' => env('RABBITMQ_DSN', null),
            
-           'queue' => env('RABBITMQ_QUEUE', 'default'),
+           'queue' => env('RABBITMQ_QUEUE', 'Import'),
            'connection' => PhpAmqpLib\Connection\AMQPLazyConnection::class,
        
            'hosts' => [

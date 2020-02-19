@@ -27,10 +27,10 @@ class ImportController extends Controller
     		
 	    	try {
 	    		$csvName = $csv[$i];
-	            $handle = fopen($csvName . '.csv', "r");
+	            $handle = fopen('imports/' . $csvName . '.csv', "r");
 
-	            dd('do not import');
 	            $import = $this->import($handle, $csvName);
+	            // dd($handle);
 	            if ($import) {
 
 					// $myFile = '/path/to/my/file.txt';
@@ -41,10 +41,9 @@ class ImportController extends Controller
 	            }
 
 	    	} catch (Exception $e) {
-	    		Log::channel('check_for_csv')->info("CSV: " . $csvName . " not found." . $e);
+	    		Log::channel('check_for_csv')->info("CSV: " . $csvName . '.csv Not found.');
 	    	}
     	}
-    	// Queue:work();
     	dd('Completed.');
     }
 
@@ -76,9 +75,7 @@ class ImportController extends Controller
         			// ProcessImport::dispatch($row)->onConnection('rabbitmq');
         			
         			$importJob = new ProcessImport($row);
-        			dispatch($importJob);
-        			// ProcessImport::dispatch($row);
-        			// 	->delay(now()->addMinutes(1));
+        			dispatch($importJob)->onQueue('Import')->onConnection('rabbitmq');
 
 
 		        } catch (Exception $e) {
@@ -88,10 +85,6 @@ class ImportController extends Controller
             }
             $rowcount++;
         }
-        // dd('all jobs dispatched.');
 		return TRUE;
-
-        // Excel::import(new ProductsImport,request()->file('file'));
-        // return back();
     }
 }

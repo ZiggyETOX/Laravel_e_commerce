@@ -142,18 +142,18 @@ return [
     'environments' => [
         'production' => [
             'supervisor-1' => [
-                'connection' => 'redis',
-                'queue' => ['default'],
+                'connection' => 'rabbitmq',
+                'queue' => ['Import'],//, 'default', 'jobs'],
                 'balance' => 'simple',
                 'processes' => 10,
-                'tries' => 1,
+                'tries' => 3,
             ],
         ],
 
         'local' => [
             'supervisor-1' => [
-                'connection' => 'redis',
-                'queue' => ['default'],
+                'connection' => 'rabbitmq',
+                'queue' => ['Import'],//, 'default', 'jobs'],
                 'balance' => 'simple',
                 'processes' => 3,
                 'tries' => 1,

@@ -3,13 +3,13 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+
 use Illuminate\Support\Facades\Log;
 use Exception;
-
 
 use app\Http\Controllers\ImportController;
 use App\Http\Controllers\ProductController;
@@ -38,8 +38,9 @@ class ProcessImport implements ShouldQueue
      */
     public function handle()
     {
-
+        // Log::channel('importLog')->info('Job ran successfully'); 
         $initial_row = $this->row;
+
         try {
             
             if ($this->row['ImportType'] == "Product") {
@@ -50,7 +51,7 @@ class ProcessImport implements ShouldQueue
             }
 
             unset($this->row['ImportType']);
-            $Process = 0;
+            $Process[0] = '0';
             switch ($this->row['ActionIndicator']) {
                 case 'A':
                     unset($this->row['ActionIndicator']);
@@ -72,14 +73,14 @@ class ProcessImport implements ShouldQueue
                     # code...
                     break;
             }
-            if ($Process == 0 || $Process == 2 ) {
+            if ($Process[0] == '0' || $Process[0] == '2' ) {
 
                 // dd('Jobs/importer', $Process);
                 // Log::error('ActionIndicator Unknown: ' . $initial_row['ActionIndicator'] . ' SKU: ' . $initial_row['SKU']);             
                 // Log::notice('UN-successfully executed Row : ' . $initial_row['row_number']);              
-                Log::channel('importLog')->info('UN-successfully executed Row : ' . $initial_row['row_number']);      
-            }elseif($Process == 1) {       
-                Log::channel('importLog')->info($initial_row['ImportType'] . ' successfully executed Row : ' . $initial_row['row_number']);
+                Log::channel('importLog')->info('UN-successfully executed Row : ' . $initial_row['row_number'] . ' Reason: ' . $Process[1]);      
+            }elseif($Process == '1') {       
+                Log::channel('importLog')->info($initial_row['ImportType'] . ' successfully executed Row : ' . $initial_row['row_number'] . ' Reason: ' . $Process[1]);
                 // Log::notice($initial_row['ImportType'] . ' successfully executed Row : ' . $initial_row['row_number']);
             }
         } catch (Exception $e) {
