@@ -144,7 +144,7 @@ class StockController extends Controller
                 $process = ['1', 'Stock Deleted, Product partner found'];
                 return $process;
             }else{
-                Log::error('Stock found. SKU: ' . $row['SKU'])
+                Log::error('Stock found. SKU: ' . $row['SKU']);
                 $process = ['2', 'Stock not Deleted, Product partner found but had no Stock to Delete'];
                 return $process;
             }
