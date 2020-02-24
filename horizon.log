@@ -1,2 +1,94 @@
 Horizon started successfully.
 Horizon started successfully.
+
+   Predis\Connection\ConnectionException  : Connection refused [tcp://localhost:6379]
+
+  at /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+    151|      */
+    152|     protected function onConnectionError($message, $code = null)
+    153|     {
+    154|         CommunicationException::handle(
+  > 155|             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156|         );
+    157|     }
+    158| 
+    159|     /**
+
+  Exception trace:
+
+  1   Predis\Connection\AbstractConnection::onConnectionError("Connection refused")
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/StreamConnection.php:128
+
+  2   Predis\Connection\StreamConnection::createStreamSocket(Object(Predis\Connection\Parameters), "tcp://localhost:6379")
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/StreamConnection.php:178
+
+  Please use the argument -v to see more details.
+
+   Predis\Connection\ConnectionException  : Connection refused [tcp://localhost:6379]
+
+  at /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+    151|      */
+    152|     protected function onConnectionError($message, $code = null)
+    153|     {
+    154|         CommunicationException::handle(
+  > 155|             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156|         );
+    157|     }
+    158| 
+    159|     /**
+
+  Exception trace:
+
+  1   Predis\Connection\AbstractConnection::onConnectionError("Connection refused")
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/StreamConnection.php:128
+
+  2   Predis\Connection\StreamConnection::createStreamSocket(Object(Predis\Connection\Parameters), "tcp://localhost:6379")
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/StreamConnection.php:178
+
+  Please use the argument -v to see more details.
+
+   Predis\Connection\ConnectionException  : `SELECT` failed: NOAUTH Authentication required. [tcp://localhost:6379]
+
+  at /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+    151|      */
+    152|     protected function onConnectionError($message, $code = null)
+    153|     {
+    154|         CommunicationException::handle(
+  > 155|             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156|         );
+    157|     }
+    158| 
+    159|     /**
+
+  Exception trace:
+
+  1   Predis\Connection\AbstractConnection::onConnectionError("`SELECT` failed: NOAUTH Authentication required.")
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/StreamConnection.php:263
+
+  2   Predis\Connection\StreamConnection::connect()
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/AbstractConnection.php:180
+
+  Please use the argument -v to see more details.
+
+   Predis\Connection\ConnectionException  : `SELECT` failed: NOAUTH Authentication required. [tcp://localhost:6379]
+
+  at /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+    151|      */
+    152|     protected function onConnectionError($message, $code = null)
+    153|     {
+    154|         CommunicationException::handle(
+  > 155|             new ConnectionException($this, static::createExceptionMessage($message), $code)
+    156|         );
+    157|     }
+    158| 
+    159|     /**
+
+  Exception trace:
+
+  1   Predis\Connection\AbstractConnection::onConnectionError("`SELECT` failed: NOAUTH Authentication required.")
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/StreamConnection.php:263
+
+  2   Predis\Connection\StreamConnection::connect()
+      /home/ettiene/internal/sites/Ecom/vendor/predis/predis/src/Connection/AbstractConnection.php:180
+
+  Please use the argument -v to see more details.

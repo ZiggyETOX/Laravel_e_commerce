@@ -23,62 +23,13 @@
                     <table border="1" width="100%">
                         <tbody>
                             <tr>
-                                <th>id</th>
-                                <th>ProductName</th>
-                                <th>ProductShortDescription</th>
-                                <th>CSProductCategory</th>
-                                <th>TopLevel</th>
-                                <th>SKU</th>
-                                <th>NewDate</th>
-                                <th>Promotion</th>
-                                <th>SAPrice</th>
-                                <th>BotswanaPrice</th>
-                                <th>NamibiaPrice</th>
-                            </tr>
-                            <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->ProductName }}</td>
-                                <td>{{ $product->ProductShortDescription }}</td>
-                                <td>{{ $product->CSProductCategory }}</td>
-                                <td>{{ $product->TopLevel }}</td>
-                                <td>{{ $product->SKU }}</td>
-                                <td>{{ $product->NewDate }}</td>
-                                <td>{{ $product->Promotion }}</td>
-                                <td>{{ $product->SAPrice }}</td>
-                                <td>{{ $product->BotswanaPrice }}</td>
-                                <td>{{ $product->NamibiaPrice }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-
-                    <h2>Stock: {{ $stockQuantity }}</h2>
-
-                    <br>
-                    <hr>
-                    <br>
-    <!-- //@method('PUT') -->
-                    <form action="/cart" method="POST">
-                        @csrf
-                        <input type="number" name="Quantity" id="Quantity" value="">
-                        <input type="hidden" name="id" id="id" value="{{ $product->id }}">
-                        <input type="submit" name="" value="Add to cart" style="btn btn-lg btn-success">
-                    </form>
-
-                    <br>
-                    <br>
-                    <br>
-
-                    <table border="1" width="100%">
-                        <tbody>
-                            <tr>
                                 <th>ProductName</th>
                                 <th>SKU</th>
                                 <th>SAPrice</th>
                                 <th style="text-align: center;">Quantity</th>
                                 <!-- <th></th> -->
                             </tr>
-                            @foreach($Items as $item) 
+                            @foreach($cartItems as $item) 
                                 <tr>
                                     <td>{{ $item->associatedModel->ProductName }}</td>
                                     <td>{{ $item->associatedModel->SKU }}</td>
@@ -97,7 +48,12 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <br>
 
+                    <h2>Stock: </h2>
+
+                    <br>
+                    <hr>
                 </div>
             </div>
         </div>

@@ -28,4 +28,10 @@ class Product extends Model
     public function OrderItem() {
         return $this->hasMany('App\OrderItem');
     }
+
+    
+    // public function DatabaseStorageModel() {
+    //     return $this->hasMany('App\DatabaseStorageModel');
+    // }
+
 }

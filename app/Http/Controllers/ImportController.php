@@ -18,7 +18,6 @@ class ImportController extends Controller
     * Check if csv is there
     */
     public function check(){
-
     	$csv = [
     		'Product',
     		'Stock'
@@ -55,6 +54,8 @@ class ImportController extends Controller
         $header = true;
         $headerArray = [];
         $rowcount = 1;
+
+        // dd($handle);
         while ($csvLine = fgetcsv($handle, 1000, ",")) {
             if ($header) {
                 $header = false;

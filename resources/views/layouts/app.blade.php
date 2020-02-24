@@ -52,7 +52,30 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item dropdown cart" id="cart">
+                                
+                                <a id="CartDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    CART: <span style="btn-success">{{ sizeOf($cartItems) }}</span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" style="padding: 10px;width: 300px;" aria-labelledby="CartDropdown">
+                                    <table width="100%">
+                                    @foreach($cartItems as $item) 
+                                        <tr>
+                                            <td>{{ $item->name }}</td>
+                                            <td align="right">{{ $item->quantity }}</td>
+                                        </tr>
+
+                                    @endforeach
+                                    </table>
+                                    <br>
+                                    <a href="/cart" class="btn btn-success">Cart</a>
+                                </div>
+                            </li>
+
                             <li class="nav-item dropdown">
+
+                                
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>

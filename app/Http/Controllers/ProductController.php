@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
 
 use App\Stock;
+use Darryldecode\Cart\Cart;
 
 use Exception;
 
@@ -23,6 +24,10 @@ class ProductController extends Controller
     {
         
         $products = \App\Product::all();
+        $user = \Auth::user();
+        $CartItems = \Cart::session($user->id)->getContent();
+
+        $return['cartItems'] = $CartItems;
         $return['products'] = $products;
         return view('/products/index', $return);
     }
@@ -71,11 +76,20 @@ class ProductController extends Controller
     {
         try {
             $stock = $product->Stock()->firstOrFail();
+            $stockQuantity = $stock->StockAmount;
         } catch (Exception $e) {
-            $stock->StockAmount = 0;
+            $stockQuantity = 0;
         }
-        $return['stock'] = $stock;
+        $Items = \Cart::getContent();
+        // dd($Items);
+        $user = \Auth::user();
+        $CartItems = \Cart::session($user->id)->getContent();
+
+        $return['Items'] = $Items;
+        $return['cartItems'] = $CartItems;
+        $return['stockQuantity'] = $stockQuantity;
         $return['product'] = $product;
+        // dd($return);
         return view('/products/show', $return);
     }
 
